@@ -1,176 +1,125 @@
 # PS-02: Ad Creative Intelligence
 
-An AI-assisted web application prototype for exploring how advertising creative attributes relate to campaign performance. The project is designed to help marketers review ad creatives, compare performance metrics, identify promising creative patterns, and make evidence-based recommendations.
+**An AI-assisted platform for exploring the relationship between advertising creative attributes and campaign performance.**
 
-> **Project status:** Prototype / under development. The features available in a running version depend on the code currently implemented in `app.py` and the frontend files.
+🔗 **Live Demo:** [Ad Creative Intelligence](https://ps02-ad-creative-intelligence.onrender.com)
+
+## Overview
+
+Ad Creative Intelligence is a web application prototype designed to help marketers organize advertising creatives, analyze campaign performance, and explore patterns that may be associated with better advertising outcomes.
+
+Instead of manually comparing multiple ad variations, users can work toward a more structured, data-driven understanding of creative performance.
 
 ## Problem Statement
 
-Advertising teams often create many ad variations but may not know which visual or content elements are associated with better results. Manually reviewing creatives and comparing campaign metrics takes time. This project aims to organize creative information and campaign data so that useful patterns can be identified more consistently.
+Advertising teams frequently create multiple creative variations but struggle to identify which visual and content attributes are associated with better campaign results. Manually reviewing creatives and comparing performance metrics can be time-consuming and inconsistent.
 
-## Objectives
+Our solution aims to bring creative information and campaign performance data together in one place, supporting faster analysis and more informed creative decisions.
 
-- Accept advertising creative files through a simple web interface.
-- Organize campaign performance data such as spend, impressions, clicks, and conversions.
-- Extract or record creative attributes, such as dominant colours, text presence, layout, and visual style, as supported by the implementation.
-- Compare creative attributes with performance metrics and rank findings by the strength of the available evidence.
-- Report sample sizes and uncertainty where the analysis supports it, and label weak or underpowered findings as inconclusive.
-- Explore future additions such as creative-brief generation, creative-fatigue alerts, and video-ad analysis.
+## Solution
+
+Ad Creative Intelligence combines a web-based interface with Python-based data processing to support advertising creative analysis.
+
+The project is designed to support:
+- Organizing advertising creative files.
+- Reviewing campaign performance metrics.
+- Exploring relationships between creative attributes and performance.
+- Identifying promising patterns while accounting for limited data and uncertainty.
+
+**Project status:** Prototype / under development. Available functionality depends on the current implementation.
 
 ## Key Features
 
-- **Web interface:** A browser-based interface built with Flask, HTML, CSS, and JavaScript.
-- **Creative-file handling:** Image processing libraries are included for working with image files. PDF and DOCX processing dependencies are also included for supporting-document workflows where implemented.
-- **Campaign analysis foundation:** Pandas and NumPy support tabular data processing and calculations.
-- **Deployable application:** Gunicorn is included as the production web server for deployment platforms such as Render.
-- **Evidence-aware reporting goal:** Findings should include sample sizes and uncertainty where possible. Observational patterns must not be presented as proof that a creative feature caused better performance.
+List only the features that are currently functional in the deployed application.
+
+- **Web Interface:** Browser-based interface built with Flask, HTML, CSS, and JavaScript.
+- **Creative File Handling:** Image-processing support using Pillow and OpenCV.
+- **Campaign Data Processing:** Pandas and NumPy for tabular data analysis and calculations.
+- **Performance Analysis:** Support for metrics such as click-through rate (CTR), conversion rate, and cost per acquisition (CPA), where implemented.
+- **Evidence-Aware Insights:** Intended to distinguish observed patterns from conclusions that require more evidence.
 
 ## Technology Stack
 
-| Component | Technology |
+| Component | Technologies |
 |---|---|
 | Backend | Python, Flask |
 | Frontend | HTML, CSS, JavaScript |
-| Data processing | Pandas, NumPy |
-| Image processing | Pillow, OpenCV |
-| Document processing | PyMuPDF, python-docx |
-| Production server | Gunicorn |
-| Hosting | Render (optional) |
+| Data Processing | Pandas, NumPy |
+| Image Processing | Pillow, OpenCV |
+| Document Processing | PyMuPDF, python-docx |
+| Deployment | Render, Gunicorn |
 
-## Project Structure
+## How It Works
 
-```text
-ps02-ad-creative-intelligence/
-├── static/
-│   ├── uploads/       # Uploaded files (keep private; normally not committed)
-│   ├── app.js         # Frontend JavaScript
-│   └── style.css      # Styles
-├── templates/
-│   └── index.html     # Main web page
-├── app.py             # Flask application
-├── requirements.txt   # Python dependencies
-├── .gitignore
-└── README.md
-```
+1. **Creative Input:** Provide advertising creatives through the supported input workflow.
+2. **Data Preparation:** Organize the available campaign information and creative attributes.
+3. **Performance Analysis:** Calculate or review relevant campaign metrics.
+4. **Insight Exploration:** Examine patterns between creative characteristics and campaign performance.
+5. **Decision Support:** Use the findings to inform future creative experiments.
 
-Your local `.venv/` folder should not be uploaded to GitHub.
+*Note: The workflow above describes the intended process. Confirm each step against the currently deployed implementation.*
 
-## Getting Started
+## Performance Metrics
 
-### 1. Requirements
+- **Click-Through Rate (CTR):** Clicks / Impressions × 100
+- **Conversion Rate:** Conversions / Clicks × 100
+- **Cost per Acquisition (CPA):** Spend / Conversions
 
-- Python installed on your computer
-- Git (only needed to clone or push the repository)
+Metrics with zero denominators should be reported as unavailable. Comparisons should account for differences in audience, budget, placement, campaign objective, and reporting period.
+
+## Running Locally
+
+### Prerequisites
+- Python
+- Git
 - A web browser
 
-### 2. Download the project
+### Installation
 
 ```bash
 git clone https://github.com/ragavi36-2007/ps02-ad-creative-intelligence.git
 cd ps02-ad-creative-intelligence
+
+python -m venv .venv
 ```
 
-If you already have the project folder on your computer, open that folder in VS Code instead.
-
-### 3. Create and activate a virtual environment
-
-**Windows PowerShell:**
+Activate the virtual environment in Windows PowerShell:
 
 ```powershell
-python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-If PowerShell blocks activation, you can use Command Prompt and run:
-
-```bat
-.venv\Scripts\activate.bat
-```
-
-### 4. Install dependencies
+Install dependencies and run the application:
 
 ```bash
 python -m pip install --upgrade pip
 pip install -r requirements.txt
-```
-
-### 5. Run the application locally
-
-```bash
 python app.py
 ```
 
-Open the local address printed in the terminal (often `http://127.0.0.1:5000`). If your `app.py` does not start the development server directly, use the run instructions configured in that file.
+Open the local URL displayed in the terminal, typically `http://127.0.0.1:5000`.
 
-## Suggested Campaign Dataset
+### Deployment
 
-For analysis of a collection of ads, a structured table can use one row per creative or creative variant. A recommended CSV schema is:
+The application is deployed on Render.
 
-| Column | Meaning |
-|---|---|
-| `creative_id` | Unique identifier for the ad creative |
-| `image_filename` | Name of the matching image file |
-| `spend` | Amount spent on the ad |
-| `impressions` | Number of times the ad was shown |
-| `clicks` | Number of clicks |
-| `conversions` | Number of recorded conversions |
+**Live application:** https://ps02-ad-creative-intelligence.onrender.com
 
-Example (illustrative data only):
+## Limitations
 
-```csv
-creative_id,image_filename,spend,impressions,clicks,conversions
-AD001,ad001.jpg,120.00,15000,450,18
-AD002,ad002.png,95.00,12000,240,9
-```
-
-Make sure the currency and attribution window are consistent across rows. Avoid including personal, confidential, or customer-identifying information. CSV ingestion is available only if it has been implemented in the current application code.
-
-## Common Performance Metrics
-
-- **Click-through rate (CTR):** `clicks / impressions × 100`
-- **Conversion rate (click-based):** `conversions / clicks × 100`
-- **Cost per conversion (CPA):** `spend / conversions`
-
-When the denominator is zero, report the metric as unavailable rather than dividing by zero. Confirm that campaigns use comparable goals, budgets, audiences, placements, and reporting windows before comparing them.
-
-## Interpreting Findings Responsibly
-
-- A pattern in a small dataset may be unstable; show the number of creatives behind each finding.
-- Use confidence intervals or other uncertainty estimates where suitable, and mark insufficient evidence as **inconclusive**.
-- An association does not demonstrate causation. Audience, placement, offer, budget, and campaign timing can also affect outcomes.
-- Treat results as decision support, not a guarantee of future campaign performance.
-
-## Deploying on Render
-
-1. Push the project to the GitHub repository.
-2. In Render, create a **Web Service** and connect the repository.
-3. Set the build command to:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Set the start command to:
-
-   ```bash
-   gunicorn app:app
-   ```
-
-5. Deploy, then open the service URL provided by Render and test the application.
-
-The `app:app` command assumes that `app.py` contains a Flask application object named `app`.
+- The quality of insights depends on the amount and reliability of the available campaign data.
+- Observed associations do not establish that a creative attribute caused a performance improvement.
+- Automated attribute extraction and statistical confidence estimates should be considered available only when implemented and validated.
 
 ## Future Enhancements
 
-- Automated creative-attribute extraction using computer vision and OCR
-- Statistical comparisons with effect sizes, sample sizes, and confidence intervals
-- Creative-brief suggestions based on supported findings
-- Creative-fatigue detection across time periods
-- Support for video ads and frame-level analysis
-- Exportable reports for campaign teams
+- Automated creative-attribute extraction using computer vision and OCR.
+- Statistical comparisons with sample sizes, effect sizes, and confidence intervals.
+- AI-assisted creative-brief recommendations.
+- Creative-fatigue detection across time periods.
+- Video-ad analysis.
+- Exportable campaign insight reports.
 
 ## License
 
-No license has been added yet. Add a `LICENSE` file before permitting reuse or redistribution under specific terms.
-
- FINAL PRODUCT -  https://ps02-ad-creative-intelligence.onrender.com
+No license has been added yet.
